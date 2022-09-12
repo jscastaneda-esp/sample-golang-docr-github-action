@@ -22,7 +22,7 @@ jobs:
       run: |
         doctl registry login --expiry-seconds 600
         docker build . -t registry.digitalocean.com/sample-go/add_sample:${{steps.github-sha.outputs.sha}}
-        docker push registry.digitalocean.com/sample-go/add_sample:${{steps.github-sha.outputs.sha}}
+        docker push registry.digitalocean.com/testghactions/add_sample:${{steps.github-sha.outputs.sha}}
     - name: DigitalOcean App Platform deployment
       uses: digitalocean/app_action@main
       with:
@@ -30,7 +30,7 @@ jobs:
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         images: '[{
                     "name": "web",
-                    "repository": "registry.digitalocean.com/sample-go/add_sample",
+                    "repository": "registry.digitalocean.com/testghactions/add_sample",
                     "tag": "${{steps.github-sha.outputs.sha}}"
                   }
                 ]'
